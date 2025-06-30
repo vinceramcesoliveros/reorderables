@@ -18,8 +18,10 @@ class _SliverExampleState extends State<SliverExample> {
             width: double.infinity,
             child: Align(
                 alignment: Alignment.centerLeft,
-                child:
-                    Text('This is sliver child $index', textScaleFactor: 2))));
+                child: Text(
+                  'This is sliver child $index',
+                  textScaler: TextScaler.linear(2),
+                ))));
   }
 
   @override

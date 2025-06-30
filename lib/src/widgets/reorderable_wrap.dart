@@ -324,35 +324,34 @@ class _ReorderableWrapState extends State<ReorderableWrap> {
 // This widget is responsible for the inside of the Overlay in the
 // ReorderableListView.
 class _ReorderableWrapContent extends StatefulWidget {
-  const _ReorderableWrapContent({
-    required this.children,
-    required this.direction,
-    required this.scrollDirection,
-    required this.scrollPhysics,
-    required this.padding,
-    required this.onReorder,
-    required this.onNoReorder,
-    required this.onReorderStarted,
-    required this.buildItemsContainer,
-    required this.buildDraggableFeedback,
-    required this.needsLongPressDraggable,
-    required this.alignment,
-    required this.spacing,
-    required this.runAlignment,
-    required this.runSpacing,
-    required this.crossAxisAlignment,
-    required this.textDirection,
-    required this.verticalDirection,
-    required this.minMainAxisCount,
-    required this.maxMainAxisCount,
-    this.header,
-    this.footer,
-    this.controller,
-    this.reorderAnimationDuration = const Duration(milliseconds: 200),
-    this.scrollAnimationDuration = const Duration(milliseconds: 200),
-    required this.enableReorder
-  });
-  
+  const _ReorderableWrapContent(
+      {required this.children,
+      required this.direction,
+      required this.scrollDirection,
+      required this.scrollPhysics,
+      required this.padding,
+      required this.onReorder,
+      required this.onNoReorder,
+      required this.onReorderStarted,
+      required this.buildItemsContainer,
+      required this.buildDraggableFeedback,
+      required this.needsLongPressDraggable,
+      required this.alignment,
+      required this.spacing,
+      required this.runAlignment,
+      required this.runSpacing,
+      required this.crossAxisAlignment,
+      required this.textDirection,
+      required this.verticalDirection,
+      required this.minMainAxisCount,
+      required this.maxMainAxisCount,
+      this.header,
+      this.footer,
+      this.controller,
+      this.reorderAnimationDuration = const Duration(milliseconds: 200),
+      this.scrollAnimationDuration = const Duration(milliseconds: 200),
+      required this.enableReorder});
+
   final List<Widget>? header;
   final Widget? footer;
   final ScrollController? controller;
@@ -590,7 +589,6 @@ class _ReorderableWrapContentState extends State<_ReorderableWrapContent>
         runAlignment = WrapAlignment.end;
         break;
       case WrapCrossAlignment.center:
-      default:
 //        crossAxisAlignment = CrossAxisAlignment.center;
         runAlignment = WrapAlignment.center;
         break;
@@ -729,8 +727,7 @@ class _ReorderableWrapContentState extends State<_ReorderableWrapContent>
       // before index+2, which is after the space at index+1.
       void moveAfter() => reorder(index, index + 2);
 
-      final MaterialLocalizations localizations =
-          MaterialLocalizations.of(context);
+      final localizations = WidgetsLocalizations.of(context);
 
       if (index > 0) {
         semanticsActions[CustomSemanticsAction(
@@ -1014,16 +1011,17 @@ class _ReorderableWrapContentState extends State<_ReorderableWrapContent>
         builder: (BuildContext context, List<int?> acceptedCandidates,
                 List<dynamic> rejectedCandidates) =>
             SizedBox(),
-        onWillAccept: (int? toAccept) => _onWillAccept(toAccept, true),
-        onAccept: (int accepted) {},
+        onWillAcceptWithDetails: (details) => _onWillAccept(details.data, true),
+        onAcceptWithDetails: (details) {},
         onLeave: (Object? leaving) {},
       );
       Widget nextDragTarget = DragTarget<int>(
         builder: (BuildContext context, List<int?> acceptedCandidates,
                 List<dynamic> rejectedCandidates) =>
             SizedBox(),
-        onWillAccept: (int? toAccept) => _onWillAccept(toAccept, false),
-        onAccept: (int accepted) {},
+        onWillAcceptWithDetails: (details) =>
+            _onWillAccept(details.data, false),
+        onAcceptWithDetails: (details) {},
         onLeave: (Object? leaving) {},
       );
 

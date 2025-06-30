@@ -18,7 +18,10 @@ class _ColumnExample2State extends State<ColumnExample2> {
               key: ValueKey(index),
               width: double.infinity,
               child: Center(
-                child: Text('This is row $index', textScaleFactor: 1.5),
+                child: Text(
+                  'This is row $index',
+                  textScaler: TextScaler.linear(1.5),
+                ),
               ),
             ));
   }

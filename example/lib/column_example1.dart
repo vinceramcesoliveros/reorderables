@@ -22,14 +22,16 @@ class _ColumnExample1State extends State<ColumnExample1> {
                   width: double.infinity,
                   child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('This is row $index', textScaleFactor: 1.5))),
+                      child: Text('This is row $index',
+                          textScaler: TextScaler.linear(1.5)))),
             ));
 
     _rows += <ReorderableWidget>[
       ReorderableWidget(
         reorderable: false,
         key: ValueKey(10),
-        child: Text('This row is not reorderable', textScaleFactor: 2),
+        child: Text('This row is not reorderable',
+            textScaler: TextScaler.linear(2)),
       )
     ];
 
@@ -42,7 +44,10 @@ class _ColumnExample1State extends State<ColumnExample1> {
                 width: double.infinity,
                 child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('This is row $index', textScaleFactor: 1.5)),
+                    child: Text(
+                      'This is row $index',
+                      textScaler: TextScaler.linear(1.5),
+                    )),
               ),
             ));
   }

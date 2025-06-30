@@ -424,7 +424,6 @@ class _ReorderableFlexContentState extends State<_ReorderableFlexContent>
             children: children,
             mainAxisAlignment: widget.mainAxisAlignment);
       case Axis.vertical:
-      default:
         return Column(
             mainAxisSize: MainAxisSize.min,
             children: children,
@@ -503,8 +502,7 @@ class _ReorderableFlexContentState extends State<_ReorderableFlexContent>
       // before index+2, which is after the space at index+1.
       void moveAfter() => reorder(index, index + 2);
 
-      final MaterialLocalizations localizations =
-          MaterialLocalizations.of(context);
+      final localizations = WidgetsLocalizations.of(context);
 
       if (index > 0) {
         semanticsActions[CustomSemanticsAction(
@@ -724,7 +722,8 @@ class _ReorderableFlexContentState extends State<_ReorderableFlexContent>
     return Builder(builder: (BuildContext context) {
       Widget dragTarget = DragTarget<int>(
         builder: buildDragTarget,
-        onWillAccept: (int? toAccept) {
+        onWillAcceptWithDetails: (details) {
+          final toAccept = details.data;
           bool willAccept = _dragStartIndex == toAccept && toAccept != index;
 
 //          debugPrint('${DateTime.now().toString().substring(5, 22)} reorderable_flex.dart(609) $this._wrap: '
@@ -751,7 +750,7 @@ class _ReorderableFlexContentState extends State<_ReorderableFlexContent>
           // If the target is not the original starting point, then we will accept the drop.
           return willAccept; //_dragging == toAccept && toAccept != toWrap.key;
         },
-        onAccept: (int accepted) {},
+        onAcceptWithDetails: (details) {},
         onLeave: (Object? leaving) {},
       );
 
@@ -920,7 +919,6 @@ class _ReorderableFlexContentState extends State<_ReorderableFlexContent>
       case Axis.horizontal:
         return Row(children: children);
       case Axis.vertical:
-      default:
         return Column(children: children);
     }
   }

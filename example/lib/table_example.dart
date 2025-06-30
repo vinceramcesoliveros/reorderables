@@ -25,7 +25,10 @@ class _TableExampleState extends State<TableExample> {
     Widget _textWithPadding(String text) {
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 4),
-        child: Text(text, textScaleFactor: 1.1),
+        child: Text(
+          text,
+          textScaler: TextScaler.linear(1.1),
+        ),
       );
     }
 
@@ -49,15 +52,19 @@ class _TableExampleState extends State<TableExample> {
 
   @override
   Widget build(BuildContext context) {
+    final textScaler = TextScaler.linear(1.5);
     var headerRow = ReorderableTableRow(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Name', textScaleFactor: 1.5),
-          Text('Math', textScaleFactor: 1.5),
-          Text('Science', textScaleFactor: 1.5),
-          Text('Physics', textScaleFactor: 1.5),
-          Text('Sports', textScaleFactor: 1.5)
+          Text(
+            'Name',
+            textScaler: textScaler,
+          ),
+          Text('Math', textScaler: textScaler),
+          Text('Science', textScaler: textScaler),
+          Text('Physics', textScaler: textScaler),
+          Text('Sports', textScaler: textScaler)
         ]);
 
     void _onReorder(int oldIndex, int newIndex) {
